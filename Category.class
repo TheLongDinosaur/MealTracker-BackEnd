@@ -1,0 +1,13 @@
+
+public enum Category {
+
+  Fruit,
+  Vegetable,
+  Protein,
+  Dessert,
+  Beverage,
+  Fat,
+  Carbohydrate;
+
+  private Category() {}
+}

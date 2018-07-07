@@ -1,0 +1,52 @@
+import java.io.PrintStream;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+public class Meal extends Food {
+
+  ArrayList<Food> foods = new ArrayList();
+
+  public Meal(String paramString, double paramDouble1, double paramDouble2, double paramDouble3, double paramDouble4,
+  ArrayList<Category> paramArrayList) {
+    super(paramString, paramDouble1, paramDouble2, paramDouble3, paramDouble4, paramArrayList);
+  }
+
+  LocalTime getMealTime() {
+    LocalTime localLocalTime = LocalTime.now();
+    return localLocalTime;
+  }
+
+  void addFood(Food paramFood) {
+    this.foods.add(paramFood);
+  }
+
+  void viewFoods() {
+    for (int i = 0; i < this.foods.size(); i++) {
+      System.out.println(((Food)this.foods.get(i)).name);
+    }
+  }
+
+  public static void main(String[] paramArrayOfString) {
+
+    ArrayList localArrayList1 = new ArrayList();
+
+    localArrayList1.add(Category.Fat);
+    localArrayList1.add(Category.Beverage);
+    localArrayList1.add(Category.Protein);
+
+    Meal localMeal = new Meal("Milkshake", 280.0D, 26.0D, 89.0D, 12.0D, localArrayList1);
+    localMeal.addFood(localMeal);
+
+    ArrayList localArrayList2 = new ArrayList();
+    localArrayList2.add(Category.Fruit);
+    localArrayList2.add(Category.Carbohydrate);
+
+    Food localFood = new Food("Watermelon", 85.0D, 0.4D, 21.0D, 1.7D, localArrayList2);
+    localMeal.addFood(localFood);
+    LocalTime localLocalTime = localMeal.getMealTime();
+
+    System.out.println(localLocalTime);
+    localMeal.viewFoods();
+  }
+
+}

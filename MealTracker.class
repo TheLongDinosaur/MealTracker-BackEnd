@@ -1,0 +1,132 @@
+import java.io.PrintStream;
+import java.util.ArrayList;
+
+public class MealTracker extends User {
+
+  ArrayList<Meal> meals = new ArrayList();
+
+  public MealTracker(String paramString1, String paramString2, int paramInt) {
+    super(paramString1, paramString2, paramInt);
+  }
+
+  void addMeal(Meal paramMeal) {
+    this.meals.add(paramMeal);
+  }
+
+  void viewMeals() {
+    for (int i = 0; i < this.meals.size(); i++) {
+      Meal localMeal = (Meal)this.meals.get(i);
+      System.out.println(localMeal.name);
+    }
+  }
+
+  int getMealCount() {
+    System.out.println("Meal Count: " + this.meals.size());
+    return this.meals.size();
+  }
+
+  double getAdherence(ArrayList<Meal> paramArrayList) {
+    double d1 = 0.0D;
+
+    int i = paramArrayList.size();
+    int[] arrayOfInt = new int[i];
+    int j = 0;
+    int k = 0;
+    int m = 0;
+    int n = 0;
+
+    for (int i1 = 0; i1 < i; i1++) {
+      Meal localMeal = (Meal)paramArrayList.get(i1);
+
+      ArrayList localArrayList = new ArrayList();
+      for (int i3 = 0; i3 < localMeal.foods.size(); i3++) {
+        for (int i4 = 0; i4 < ((Food)localMeal.foods.get(i3)).categories.size(); i4++) {
+          localArrayList.add(((Food)localMeal.foods.get(i3)).categories.get(i4));
+        }
+      }
+
+      for (i3 = 0; i3 < localArrayList.size(); i3++) {
+        Category localCategory = (Category)localArrayList.get(i3);
+        switch (localCategory) {
+        case Fat:
+          j = 1;
+          break;
+        case Fruit:
+          k = 1;
+          break;
+        case Vegetable:
+          m = 1;
+          break;
+        case Protein:
+          n = 1;
+        }
+      }
+      if (j + n + k + m == 4) {
+        arrayOfInt[i1] = 1;
+      }
+    }
+
+    double d2 = 0.0D;
+    for (int i2 = 0; i2 < i; i2++) {
+      d2 += arrayOfInt[i2];
+    }
+    d1 = d2 / i;
+
+    return d1;
+  }
+
+  boolean isOnTrack(double paramDouble) {
+    if (paramDouble >= 0.5D) {
+      System.out.println("Adherance TRUE");
+      return true;
+    }
+    System.out.println("Adherance FALSE");
+    return false;
+  }
+
+  public static void main(String[] paramArrayOfString) {
+
+    MealTracker localMealTracker = new MealTracker("Carrie", "thelongdinosaur@gmail.com", 36);
+    System.out.println("Meal Tracker User name: " + localMealTracker.name);
+
+    ArrayList localArrayList1 = new ArrayList();
+    localArrayList1.add(Category.Fat);
+    localArrayList1.add(Category.Beverage);
+    localArrayList1.add(Category.Protein);
+
+    ArrayList localArrayList2 = new ArrayList();
+    localArrayList2.add(Category.Fat);
+    localArrayList2.add(Category.Dessert);
+
+    ArrayList localArrayList3 = new ArrayList();
+    localArrayList3.add(Category.Fat);
+    localArrayList3.add(Category.Dessert);
+
+    ArrayList localArrayList4 = new ArrayList();
+    Meal localMeal1 = new Meal("dessert", 0.0D, 0.0D, 0.0D, 0.0D, localArrayList4);
+    Food localFood1 = new Food("macaroon", 97.0D, 3.0D, 17.0D, 0.9D, localArrayList2);
+    Food localFood2 = new Food("milkshake", 280.0D, 26.0D, 89.0D, 12.0D, localArrayList1);
+    Food localFood3 = new Food("cake", 80.0D, 2.0D, 14.0D, 1.0D, localArrayList3);
+    localMeal1.addFood(localFood1);
+    localMeal1.addFood(localFood2);
+    localMeal1.addFood(localFood3);
+    localMealTracker.addMeal(localMeal1);
+
+    ArrayList localArrayList5 = new ArrayList();
+    localArrayList5.add(Category.Fruit);
+    localArrayList5.add(Category.Vegetable);
+
+    ArrayList localArrayList6 = new ArrayList();
+    Meal localMeal2 = new Meal("fruit", 0.0D, 0.0D, 0.0D, 0.0D, localArrayList6);
+    Food localFood4 = new Food("watermelon", 85.0D, 0.4D, 21.0D, 1.7D, localArrayList5);
+    localMeal2.addFood(localFood4);
+    localMeal2.addFood(localFood2);
+    localMealTracker.addMeal(localMeal2);
+
+    localMealTracker.viewMeals();
+    localMealTracker.getMealCount();
+
+    localMealTracker.isOnTrack(localMealTracker.getAdherence(localMealTracker.meals));
+  }
+
+}

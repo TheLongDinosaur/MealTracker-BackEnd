@@ -1,0 +1,28 @@
+import java.io.PrintStream;
+
+public class User {
+
+  String name;
+  String email;
+  int age;
+
+  public User(String paramString1, String paramString2, int paramInt) {
+
+    this.name = paramString1;
+    this.email = paramString2;
+    this.age = paramInt;
+  }
+
+  double targetAdherence() {
+    return 1.0D;
+  }
+
+  public static void main(String[] paramArrayOfString) {
+
+    User localUser = new User("Carrie", "thelongdinosaur@gmail.com", 36);
+    System.out.println("User name: " + localUser.name);
+    System.out.println("User email: " + localUser.email);
+    System.out.println("User age: " + localUser.age);
+  }
+
+}
